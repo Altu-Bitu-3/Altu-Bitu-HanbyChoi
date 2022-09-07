@@ -24,7 +24,7 @@ bool cmp(student a, student b){ // a가 b보다 먼저 나오는게 맞아? -> t
     return a.kor > b.kor; // 국어 점수가 감소하는 순서대로 정렬
 }*/
 
-bool cmp(const student& a, const student& b){ // 같을 때 말고 다를 떄를 처리해주면 인덴테이션이 깊어지지 않음
+bool cmp(const student& a, const student& b){ // 같을 때 말고 다를 때를 처리해주면 인덴테이션이 깊어지지 않음
     if (a.kor != b.kor){
         return a.kor > b.kor; // 국어 점수 감소 순
     }
