@@ -11,7 +11,7 @@ vector<int> isPrime(){
         if(prime[i] != 0){ // i가 소수가 아니면
             continue;
         }
-        for (int j=i+1; j<=MAX; j+=i){ // i가 소수라면
+        for (int j=i*i; j<=MAX; j+=i){ // i가 소수라면
             if(prime[j] == 0){ // j가 지워야 할 수라면
                 prime[j] = i;
             }
@@ -21,6 +21,9 @@ vector<int> isPrime(){
 }
 
 int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
     int n;
     cin >> n;
     // 소수 경로 구하기
