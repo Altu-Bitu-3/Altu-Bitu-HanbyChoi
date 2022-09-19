@@ -2,38 +2,43 @@
 #include <iostream>
 #include <vector>
 #include <stack>
-#include <algorithm>
 using namespace std;
+
+vector<int> findNGF(vector<int>& cnt, vector<int>& num, int n){
+    stack<int> st;
+    vector<int> result(n, -1);
+
+    for (int i = n - 1; i >= 0; i--) {
+		while (!st.empty() && cnt[num[i]] >= cnt[st.top()]) { // 스택이 비어있지 않은 경우 오등큰수 찾을 때까지 pop
+			st.pop();
+		}
+
+		if (!st.empty()) { // 위의 while문을 벗어남 - 오등큰수 찾은 경우
+			result[i] = st.top();
+		}
+
+		// 현재 참조하는 수가 왼쪽 원소들 중에서 오등큰수가 될 수 있으니 저장
+		st.push(num[i]);
+	}
+    return result;
+}
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(NULL);
+
     int n, input;
     cin >> n;
-    vector<int> num, cnt;
-    stack<int> compare;
+    vector<int> num(n, 0), cnt(1000001, 0), result; // 선언과 동시에 크기 지정
     
     for (int i=0; i<n; i++){ // num
-        cin >> input;
-        num.push_back(input);
+        cin >> num[i];
+        cnt[num[i]]++;
     }
-    for (int i=0; i<n; i++){ // count
-        cnt.push_back(count(num.begin(), num.end(), num[i])); 
-    }
-    for (int i=0; i<n; i++){
-        for (int j=n-1; j>i; j--){ // 맨 오른쪽 수부터 검사
-            if (cnt[i] < cnt[j]){ // 기준이 되는 수보다 등장 횟수가 더 크면
-                compare.push(num[j]); // 스택에 삽입
-            }
-        }
-        if (compare.empty()){
-            cout << "-1 ";
-        } else{
-            cout << compare.top() << " "; // 등장 횟수가 큰 수 중 가장 왼쪽에 있는 수 ngf에 저장
-                while(!compare.empty()){
-                    compare.pop();
-                }
-        }
+
+    result = findNGF(cnt, num, n);
+    for (int i=0; i<n; i++){ // num
+        cout << result[i] << ' ';
     }
     return 0;
 }
