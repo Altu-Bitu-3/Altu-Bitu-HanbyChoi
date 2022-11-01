@@ -26,7 +26,7 @@ int main(){
     cout.tie(NULL);
     int n, a, b;
     cin >> n;
-    for (int i=0; i<n; i++){
+    for (int i=0; i<n-1; i++){
         cin >> a >> b;
         tree[a].push_back(b);
         tree[b].push_back(a);
