@@ -9,8 +9,8 @@ const int INF = 2e9;
 ci dijkstra(int start, int n, vector<vector<ci>> &com){
     ci ans = {0, 0};
     vector<int> time(n+1, INF);
-    time[start] = 0;
     priority_queue<ci, vector<ci>, greater<ci>> pq; // 감염 시간, 컴퓨터
+    time[start] = 0;
     pq.push({0, start});
     while (!pq.empty()) {
         int currentTime = pq.top().first; // 현재까지 누적된 감염 시간
@@ -48,10 +48,10 @@ int main(){
     while (t--)
     {
         cin >> n >> d >> c;
-        vector<vector<ci>> com(n+1, vector<ci>(0));
+        vector<vector<ci>> com(n+1, vector<ci>(0)); // 인접 리스트
         while (d--) {
             cin >> a >> b >> s;
-            com[a].push_back({b, s});
+            com[b].push_back({a, s}); // 방향 그래프
         }
         ci ans = dijkstra(c, n, com); 
         cout << ans.first << ' ' << ans.second << '\n';
