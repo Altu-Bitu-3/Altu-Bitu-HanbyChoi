@@ -14,15 +14,20 @@ int cntWord(vector<string> &word){
     for (int i=1; i<word.size(); i++){
         if (abs((int)(word[0].length() - word[i].length())) > 1){ // 단어 길이가 2 이상 차이나면
             continue; // 비슷한 구성일 수 없음
-        } else{
-            int diff = 0;
-            for (int j=0; j<26; j++){
-                diff += (alphabet[0][j] - alphabet[i][j]);
-            }
-            if (abs(diff) <= 1){
-                wordCnt++;
-            }
-        }   
+        }
+
+        int diff = 0;
+        for (int j=0; j<26; j++){
+            diff += abs(alphabet[0][j] - alphabet[i][j]);
+        }
+
+        if (diff > 2) { // 차이가 3개 이상이면
+            continue; // 비슷한 구성일 수 없음
+        } else if (diff == 2 && (word[0].length() - word[i].length()) != 0){ // 차이가 2개 나는데 길이가 다르면
+            continue; // 비슷한 구성일 수 없음
+        }
+
+        wordCnt++;
     }
     return wordCnt;
 }
