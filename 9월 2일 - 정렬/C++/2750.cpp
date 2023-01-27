@@ -10,7 +10,7 @@ void bubbleSort(int n){
             if (arr[j] > arr[j+1]){
                 /* 두 원소를 swap
                 int tmp = arr[j];
-                arr[j] = arr[j+1];
+                arr[j] = arr[j+1];R
                 arr[j+1] = tmp; */
                 swap(arr[j], arr[j+1]);
             }
